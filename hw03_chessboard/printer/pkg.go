@@ -2,11 +2,13 @@ package printer
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
 func printLine(even bool, width int) {
-	var a, b = "#", " "
+	a := "#"
+	b := " "
 	if even {
 		a, b = b, a
 	}
@@ -20,7 +22,7 @@ func printLine(even bool, width int) {
 }
 
 func PrintRows(width int, height int) {
-	var border = strings.Repeat("-", width)
+	border := strings.Repeat("-", width)
 	fmt.Printf("+%s+\n", border)
 	for i := 0; i < height; i++ {
 		fmt.Print("|")
@@ -32,4 +34,5 @@ func PrintRows(width int, height int) {
 		fmt.Print("|\n")
 	}
 	fmt.Printf("+%s+\n", border)
+	os.Exit(0)
 }
