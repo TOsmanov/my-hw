@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 
@@ -22,25 +23,28 @@ func main() {
 
 	if len(input) == 0 {
 		printer.PrintRows(8, 8)
+		os.Exit(0)
 	}
 
 	inputArr := strings.Split(strings.ToLower(input), "x")
 
 	width, err = strconv.Atoi(inputArr[0])
-	if width < 2 {
+	if err != nil {
+		fmt.Printf("Error incorrect size: the entered width \"%s\" is incorrect.\n", input)
+		os.Exit(1)
+	} else if width < 2 {
 		width = 2
 	}
 	if len(inputArr) < 2 {
 		height = width
 	} else {
 		height, err = strconv.Atoi(inputArr[1])
-		if height < 2 {
+		if err != nil {
+			fmt.Printf("Error incorrect size: the entered height \"%s\" is incorrect.\n", input)
+			os.Exit(1)
+		} else if height < 2 {
 			height = 2
 		}
-	}
-	if err != nil {
-		fmt.Printf("Error: the entered size \"%s\" is incorrect.\n", input)
-		panic(err)
 	}
 
 	printer.PrintRows(width, height)
