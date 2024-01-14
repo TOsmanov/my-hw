@@ -1,6 +1,6 @@
 package book
 
-func (b *Book) SetID(id int) {
+func (b *Book) SetID(id string) {
 	b.id = id
 }
 

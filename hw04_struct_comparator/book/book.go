@@ -1,7 +1,7 @@
 package book
 
 type Book struct {
-	id     int
+	id     string
 	title  string
 	author string
 	year   int
@@ -19,10 +19,7 @@ const (
 	Rate
 )
 
-var id int
-
-func NewBook(title string, author string, year int, size int, rate float32) *Book {
-	id++
+func NewBook(id string, title string, author string, year int, size int, rate float32) *Book {
 	return &Book{
 		id:     id,
 		title:  title,
