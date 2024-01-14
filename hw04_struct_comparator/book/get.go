@@ -1,6 +1,6 @@
 package book
 
-func (b *Book) GetId() int {
+func (b *Book) GetID() int {
 	return b.id
 }
 
