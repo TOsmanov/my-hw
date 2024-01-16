@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	. "github.com/TOsmanov/my-hw/hw05_shapes/shape"
+	"github.com/TOsmanov/my-hw/hw05_shapes/shape"
 )
 
 func calculateArea(s any) (float64, error) {
-	shape, ok := s.(Shape)
+	shape, ok := s.(shape.Shape)
 	if !ok {
 		return 0, fmt.Errorf("this is not a shape")
 	}
@@ -18,7 +18,7 @@ func main() {
 	var area float64
 	var err error
 
-	var c1 = Circle{
+	c1 := shape.Circle{
 		Radius: 5,
 	}
 
@@ -29,7 +29,7 @@ func main() {
 		fmt.Printf("Площадь: %v\r\n\n", area)
 	}
 
-	var r1 = Rectangle{
+	r1 := shape.Rectangle{
 		Width:  10,
 		Height: 5,
 	}
@@ -41,7 +41,7 @@ func main() {
 		fmt.Printf("Площадь: %v\r\n\n", area)
 	}
 
-	var t1 = Triangle{
+	t1 := shape.Triangle{
 		Base:   8,
 		Height: 6,
 	}
@@ -57,7 +57,7 @@ func main() {
 		weight int
 	}
 
-	var d1 = Dog{
+	d1 := Dog{
 		weight: 12,
 	}
 
