@@ -22,6 +22,7 @@ func TestPrintStaff(t *testing.T) {
 			DepartmentID: 346,
 		},
 	}
-	expected := "User ID: 2, Age: 45, Name: Tom, Department ID: 51; User ID: 23, Age: 31, Name: Jerry, Department ID: 346; "
+	expected := "User ID: 2, Age: 45, Name: Tom, Department ID: 51; "
+	expected += "User ID: 23, Age: 31, Name: Jerry, Department ID: 346; "
 	assert.Equal(t, expected, PrintStaff(data))
 }

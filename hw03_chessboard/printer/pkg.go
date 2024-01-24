@@ -54,7 +54,7 @@ func Printer(input string) (string, error) {
 
 	width, err = strconv.Atoi(inputArr[0])
 	if err != nil {
-		return "", fmt.Errorf("Error incorrect size: the entered width \"%s\" is incorrect.\n", input)
+		return "", fmt.Errorf("error incorrect size: the entered width \"%s\" is incorrect", input)
 	} else if width < 2 {
 		width = 2
 	}
@@ -63,7 +63,7 @@ func Printer(input string) (string, error) {
 	} else {
 		height, err = strconv.Atoi(inputArr[1])
 		if err != nil {
-			return "", fmt.Errorf("Error incorrect size: the entered height \"%s\" is incorrect.\n", input)
+			return "", fmt.Errorf("error incorrect size: the entered height \"%s\" is incorrect", input)
 		} else if height < 2 {
 			height = 2
 		}

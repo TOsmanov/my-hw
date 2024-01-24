@@ -93,5 +93,4 @@ func TestSetAndGet(t *testing.T) {
 	assert.Equal(t, 100, b1.Size())
 	b1.SetRate(9.5)
 	assert.Equal(t, float32(9.5), b1.Rate())
-
 }

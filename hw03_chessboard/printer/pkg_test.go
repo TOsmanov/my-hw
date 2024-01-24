@@ -102,6 +102,7 @@ func TestErrorsPrinter(t *testing.T) {
 	var input string
 	var str string
 	var err error
+
 	// Incorrect width
 	input = "6xText"
 	str, err = Printer(input)
@@ -113,5 +114,4 @@ func TestErrorsPrinter(t *testing.T) {
 	str, err = Printer(input)
 	assert.Equal(t, "", str)
 	assert.NotNil(t, err)
-
 }
