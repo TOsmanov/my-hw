@@ -26,6 +26,6 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error: %v", err)
 	} else {
-		printer.PrintStaff(staff)
+		fmt.Println(printer.PrintStaff(staff))
 	}
 }
