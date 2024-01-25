@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
+	"os"
 
 	"github.com/TOsmanov/my-hw/hw02_fix_app/printer"
 	"github.com/TOsmanov/my-hw/hw02_fix_app/reader"
@@ -11,7 +11,6 @@ import (
 
 func main() {
 	var path string
-	var output bytes.Buffer
 
 	fmt.Printf("Enter data file path: ")
 	fmt.Scanln(&path)
@@ -28,6 +27,6 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error: %v", err)
 	} else {
-		printer.PrintStaff(&output, staff)
+		printer.PrintStaff(os.Stdout, staff)
 	}
 }
