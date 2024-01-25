@@ -9,36 +9,36 @@ import (
 func printLine(even bool, width int) string {
 	a := '#'
 	b := ' '
-	var str string
+	var builder strings.Builder
 	if even {
 		a, b = b, a
 	}
 	for i := 0; i < width; i++ {
 		if i%2 == 0 {
-			str += string(a)
+			builder.WriteString(string(a))
 		} else {
-			str += string(b)
+			builder.WriteString(string(b))
 		}
 	}
-	return str
+	return builder.String()
 }
 
 func PrintRows(width int, height int) string {
-	var str string
+	var builder strings.Builder
 
 	border := strings.Repeat("-", width)
-	str += fmt.Sprintf("+%s+\n", border)
+	builder.WriteString(fmt.Sprintf("+%s+\n", border))
 	for i := 0; i < height; i++ {
-		str += "|"
+		builder.WriteString("|")
 		if i%2 == 0 {
-			str += printLine(true, width)
+			builder.WriteString(printLine(true, width))
 		} else {
-			str += printLine(false, width)
+			builder.WriteString(printLine(false, width))
 		}
-		str += fmt.Sprintln("|")
+		builder.WriteString(fmt.Sprintln("|"))
 	}
-	str += fmt.Sprintf("+%s+\n", border)
-	return str
+	builder.WriteString(fmt.Sprintf("+%s+\n", border))
+	return builder.String()
 }
 
 func Printer(input string) (string, error) {
