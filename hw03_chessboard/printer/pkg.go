@@ -1,0 +1,72 @@
+package printer
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func printLine(even bool, width int) string {
+	a := '#'
+	b := ' '
+	var builder strings.Builder
+	if even {
+		a, b = b, a
+	}
+	for i := 0; i < width; i++ {
+		if i%2 == 0 {
+			builder.WriteString(string(a))
+		} else {
+			builder.WriteString(string(b))
+		}
+	}
+	return builder.String()
+}
+
+func PrintRows(width int, height int) string {
+	var builder strings.Builder
+
+	border := strings.Repeat("-", width)
+	builder.WriteString(fmt.Sprintf("+%s+\n", border))
+	for i := 0; i < height; i++ {
+		builder.WriteString("|")
+		if i%2 == 0 {
+			builder.WriteString(printLine(true, width))
+		} else {
+			builder.WriteString(printLine(false, width))
+		}
+		builder.WriteString(fmt.Sprintln("|"))
+	}
+	builder.WriteString(fmt.Sprintf("+%s+\n", border))
+	return builder.String()
+}
+
+func Printer(input string) (string, error) {
+	var err error
+	var width int
+	var height int
+
+	if len(input) == 0 {
+		return PrintRows(8, 8), nil
+	}
+
+	inputArr := strings.Split(strings.ToLower(input), "x")
+
+	width, err = strconv.Atoi(inputArr[0])
+	if err != nil {
+		return "", fmt.Errorf("error incorrect size: the entered width \"%s\" is incorrect", input)
+	} else if width < 2 {
+		width = 2
+	}
+	if len(inputArr) < 2 {
+		height = width
+	} else {
+		height, err = strconv.Atoi(inputArr[1])
+		if err != nil {
+			return "", fmt.Errorf("error incorrect size: the entered height \"%s\" is incorrect", input)
+		} else if height < 2 {
+			height = 2
+		}
+	}
+	return PrintRows(width, height), err
+}
