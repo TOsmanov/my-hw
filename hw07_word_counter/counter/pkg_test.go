@@ -14,6 +14,12 @@ func TestCountWords(t *testing.T) {
 	assert.Equal(t, expected, CountWords(text))
 
 	// Case 2
+	text = `привет мир`
+	expected = map[string]int{"мир": 1, "привет": 1}
+
+	assert.Equal(t, expected, CountWords(text))
+
+	// Case 3
 	text = `I have English on Monday, Wednesday and Thursday. English is usually the second lesson.
 
 At the English lesson we speak, read and write. We speak about school, pupils and teachers,
@@ -37,7 +43,7 @@ I like English. I can read and write well, but I can't speak English well yet.`
 
 	assert.Equal(t, expected, CountWords(text))
 
-	// Case 3
+	// Case 4
 	text = `Когда человек сознательно или интуитивно выбирает себе в жизни какую-то цель,
 жизненную задачу, он невольно дает себе оценку. По тому, ради чего человек живет,
 можно судить и о его самооценке - низкой или высокой.
