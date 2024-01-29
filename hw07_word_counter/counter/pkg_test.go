@@ -24,14 +24,16 @@ We write letters, words, sentences, exercises and dictations.
 We play at English, too. We sing songs and learn poems.
 
 I like English. I can read and write well, but I can't speak English well yet.`
-	expected = map[string]int{"about": 4, "and": 10, "animals": 1, "at": 2, "books": 1, "but": 1,
+	expected = map[string]int{
+		"about": 4, "and": 10, "animals": 1, "at": 2, "books": 1, "but": 1,
 		"can": 1, "can't": 1, "children": 1, "dictations": 1, "english": 6, "exercises": 1,
 		"friends": 1, "games": 1, "have": 1, "i": 4, "is": 1, "learn": 1, "lesson": 2, "lessons": 1,
 		"letters": 1, "life": 1, "like": 1, "monday": 1, "nature": 2, "on": 2, "our": 1, "play": 1,
 		"poems": 1, "pupils": 1, "read": 3, "school": 2, "second": 1, "sentences": 1, "sing": 1,
 		"so": 1, "songs": 1, "speak": 3, "sports": 1, "stories": 1, "teachers": 1, "the": 2,
 		"thursday": 1, "too": 1, "usually": 1, "we": 6, "wednesday": 1, "well": 2,
-		"words": 1, "write": 3, "yet": 1}
+		"words": 1, "write": 3, "yet": 1,
+	}
 
 	assert.Equal(t, expected, CountWords(text))
 
@@ -64,7 +66,8 @@ I like English. I can read and write well, but I can't speak English well yet.`
 подозрительности, какого-то тягостного молчания, а может внести сразу радость, свет.
 Вот это и есть творчество.`
 
-	expected = map[string]int{"а": 2, "атмосферу": 2, "балериной": 1, "благополучии": 1, "было": 1,
+	expected = map[string]int{
+		"а": 2, "атмосферу": 2, "балериной": 1, "благополучии": 1, "было": 1,
 		"быть": 4, "в": 9, "великодушия": 1, "внести": 1, "вокруг": 1, "вот": 1, "врать": 1, "всего": 2,
 		"вспоминать": 1, "выбирает": 1, "высокой": 1, "да": 1, "давать": 1, "дает": 1, "деликатности": 1,
 		"для": 2, "добро": 2, "доброты": 1, "добрую": 1, "должен": 1, "должна": 1, "должно": 1,
@@ -89,7 +92,8 @@ I like English. I can read and write well, but I can't speak English well yet.`
 		"только": 2, "тому": 2, "требует": 1, "тягостного": 1, "у": 1, "увеличивать": 1, "удовольствий": 1,
 		"умения": 1, "уметь": 2, "уровне": 1, "успешно": 1, "ученым": 1, "хорошим": 1, "художником": 1,
 		"цели": 1, "цель": 5, "чего": 1, "человек": 7, "человека": 2, "человеку": 1, "человечности": 1,
-		"чем": 1, "чему": 2, "что": 2, "чтобы": 3, "эгоистом": 1, "это": 2, "этой": 1}
+		"чем": 1, "чему": 2, "что": 2, "чтобы": 3, "эгоистом": 1, "это": 2, "этой": 1,
+	}
 
 	assert.Equal(t, expected, CountWords(text))
 }
