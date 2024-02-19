@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/TOsmanov/my-hw/hw09_serialize/book"
 	"github.com/TOsmanov/my-hw/hw09_serialize/proto"
@@ -18,7 +19,12 @@ func main() {
 		Rate:   9,
 	}
 
-	j, _ := book.Book.MarshalJSON(b1)
+	j, err := book.Book.MarshalJSON(b1)
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+
 	fmt.Printf("Marshal:\n\t %v\n", string(j))
 
 	var bookCopy book.Book
@@ -55,12 +61,35 @@ func main() {
 		},
 	}
 
-	j, _ = json.Marshal(books)
+	j, err = json.Marshal(books)
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+
 	fmt.Printf("Marshal slice:\n\t %v\n", string(j))
 
 	booksCopy := []book.Book{}
 	json.Unmarshal(j, &booksCopy)
 	fmt.Printf("Unmarshal slice:\n\t %v\n\n", booksCopy)
+
+	// Slices methods
+
+	j, err = book.MarshalSlice(books)
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Marshal slice method:\n\t %v\n", string(j))
+
+	books1Copy, err := book.UnmarshalSlice(j)
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Unmarshal slice method:\n\t %v\n\n", books1Copy)
 
 	// Proto
 
