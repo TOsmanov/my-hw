@@ -144,7 +144,6 @@ func main() {
 		},
 	}
 
-	fmt.Println(pBooks)
 	j, err = proto.Marshal(pBooks.ProtoReflect().Interface())
 	if err != nil {
 		fmt.Print(err)
