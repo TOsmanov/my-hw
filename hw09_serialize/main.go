@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/TOsmanov/my-hw/hw09_serialize/book"
-	"github.com/TOsmanov/my-hw/hw09_serialize/proto"
+	pbook "github.com/TOsmanov/my-hw/hw09_serialize/pbook"
+	"google.golang.org/protobuf/proto"
 )
 
 func main() {
@@ -93,7 +95,7 @@ func main() {
 
 	// Proto
 
-	book1 := proto.Book{
+	pBook1 := pbook.Book{
 		Id:     "978-5-04-154507-9",
 		Title:  "Моби Дик",
 		Author: "Герман Мелвилл",
@@ -101,36 +103,56 @@ func main() {
 		Size:   576,
 		Rate:   9,
 	}
-	fmt.Printf("Proto String:\n\t %v\n\n", book1.String())
-	fmt.Printf("Proto String:\n\t %v\n\n", book1.GetTitle())
+	j, err = proto.Marshal(pBook1.ProtoReflect().Interface())
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+	fmt.Printf("Proto Marshal:\n\t %v\n", strings.Trim(string(j), "\n"))
+	var pBookCopy pbook.Book
+	proto.Unmarshal(j, &pBookCopy)
+	fmt.Printf("Proto Unmarshal:\n\t %v\n\n", pBookCopy.String())
 
-	pBooks := []proto.Book{
-		{
-			Id:     "978-5-04-154507-9",
-			Title:  "Моби Дик",
-			Author: "Герман Мелвилл",
-			Year:   1851,
-			Size:   576,
-			Rate:   9,
-		},
-		{
-			Id:     "978-5-17-109413-3",
-			Title:  "Приключения Тома Сойера",
-			Author: "Марк Твен",
-			Year:   1876,
-			Size:   90,
-			Rate:   9.7,
-		},
-		{
-			Id:     "978-5-04-116639-7",
-			Title:  "Приключения Гекльберри Финна",
-			Author: "Марк Твен",
-			Year:   1884,
-			Size:   95,
-			Rate:   9.3,
+	// Proto slices
+
+	pBooks := pbook.Books{
+		Book: []*pbook.Book{
+			{
+				Id:     "978-5-04-154507-9",
+				Title:  "Моби Дик",
+				Author: "Герман Мелвилл",
+				Year:   1851,
+				Size:   576,
+				Rate:   9,
+			},
+			{
+				Id:     "978-5-17-109413-3",
+				Title:  "Приключения Тома Сойера",
+				Author: "Марк Твен",
+				Year:   1876,
+				Size:   90,
+				Rate:   9.7,
+			},
+			{
+				Id:     "978-5-04-116639-7",
+				Title:  "Приключения Гекльберри Финна",
+				Author: "Марк Твен",
+				Year:   1884,
+				Size:   95,
+				Rate:   9.3,
+			},
 		},
 	}
-	fmt.Printf("Proto String:\n\t %v\n\n", pBooks[0].String())
-	fmt.Printf("Proto String:\n\t %v\n\n", pBooks[0].GetTitle())
-	fmt.Printf("Proto String:\n\t %v\n\n", pBooks[1].GetTitle())
+
+	fmt.Println(pBooks)
+	j, err = proto.Marshal(pBooks.ProtoReflect().Interface())
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+	fmt.Printf("Proto Marshal slice:\n\t %v\n", strings.Trim(string(j), "\n"))
+
+	var pBooksCopy pbook.Books
+	proto.Unmarshal(j, &pBooksCopy)
+	fmt.Printf("Proto Unmarshal slice:\n\t %v\n\n", pBooksCopy.String())
 }
