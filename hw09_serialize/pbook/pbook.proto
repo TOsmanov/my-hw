@@ -3,14 +3,14 @@ syntax = "proto3";
 option go_package = "../pbook";
 
 message Books {
-    repeated Book Book = 1;
+	repeated Book Book = 1;
 }
 
 message Book {
-    string id = 1;
+	string id = 1;
 	string title = 2;
 	string author = 3;
 	int32 year = 4;
 	int32 size = 5;
-    float rate = 6;
+	float rate = 6;
 }
