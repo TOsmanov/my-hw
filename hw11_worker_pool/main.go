@@ -16,9 +16,9 @@ func (counter *Counter) Incrementation(size int) {
 		counter.wg.Add(1)
 		go func(i int) {
 			defer counter.wg.Done()
+			defer counter.printer(i)
 			counter.m.Lock()
 			counter.C++
-			counter.printer(i)
 			counter.m.Unlock()
 		}(i)
 	}
@@ -26,7 +26,9 @@ func (counter *Counter) Incrementation(size int) {
 }
 
 func (counter *Counter) printer(num int) {
+	counter.m.Lock()
 	fmt.Printf("Goroutin %d is done \n\tCounter value: %d\n", num, counter.C)
+	counter.m.Unlock()
 }
 
 func main() {
