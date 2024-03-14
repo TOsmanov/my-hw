@@ -8,9 +8,9 @@ import (
 
 func TestIncremetation(t *testing.T) {
 	counter := Counter{}
-	counter.c = 10
+	counter.C = 10
 
-	counter.incremetation(100)
+	counter.Incrementation(100)
 
-	assert.Equal(t, counter.c, 110)
+	assert.Equal(t, counter.C, 110)
 }

@@ -6,28 +6,32 @@ import (
 )
 
 type Counter struct {
-	c  int
+	C  int
 	m  sync.Mutex
 	wg sync.WaitGroup
 }
 
-func (counter *Counter) incremetation(max int) {
-	for i := 0; i < max; i++ {
+func (counter *Counter) Incrementation(size int) {
+	for i := 0; i < size; i++ {
 		counter.wg.Add(1)
-		go func() {
+		go func(i int) {
 			defer counter.wg.Done()
+			defer counter.printer(i)
 			counter.m.Lock()
-			counter.c++
-			fmt.Println(counter.c)
+			counter.C++
 			counter.m.Unlock()
-		}()
+		}(i)
 	}
 	counter.wg.Wait()
 }
 
+func (counter *Counter) printer(num int) {
+	fmt.Printf("Goroutin %d is done \n\tCounter value: %d\n", num, counter.C)
+}
+
 func main() {
 	c1 := Counter{}
-	c1.c = 0
+	c1.C = 275
 
-	c1.incremetation(1000)
+	c1.Incrementation(50)
 }
