@@ -16,9 +16,9 @@ func (counter *Counter) Incrementation(size int) {
 		counter.wg.Add(1)
 		go func(i int) {
 			defer counter.wg.Done()
-			defer counter.printer(i)
 			counter.m.Lock()
 			counter.C++
+			counter.printer(i)
 			counter.m.Unlock()
 		}(i)
 	}
