@@ -22,7 +22,7 @@ func (c *Client) makeURL() string {
 	return fmt.Sprintf("%s/%s", c.URL, c.Path)
 }
 
-func (c *Client) GetMessage() (string, error) {
+func (c *Client) GetData() (string, error) {
 	req, err := http.NewRequestWithContext(
 		context.Background(),
 		http.MethodGet,
@@ -38,14 +38,10 @@ func (c *Client) GetMessage() (string, error) {
 	}
 	defer resp.Body.Close()
 
-	bodyBytes, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-	return string(bodyBytes), nil
+	return PrintResponse(resp)
 }
 
-func (c *Client) PostMessage(msg string) (string, error) {
+func (c *Client) PostData(msg string) (string, error) {
 	data := []byte(msg)
 	body := bytes.NewReader(data)
 	req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, c.makeURL(), body)
@@ -59,9 +55,14 @@ func (c *Client) PostMessage(msg string) (string, error) {
 	}
 	defer resp.Body.Close()
 
+	return PrintResponse(resp)
+}
+
+func PrintResponse(resp *http.Response) (string, error) {
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
-	return string(bodyBytes), nil
+
+	return fmt.Sprintf("%s %s", resp.Status, string(bodyBytes)), nil
 }

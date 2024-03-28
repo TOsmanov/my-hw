@@ -1,64 +1,92 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"os"
+	"strings"
 	"time"
 )
 
-var message string
-
-func init() {
-	message = "Hello world!"
+type idJSON struct {
+	ID string `json:"id"`
 }
 
 func Start(address string, port string) {
-	http.HandleFunc("/", Handle)
+	url := fmt.Sprintf("%s:%s", address, port)
+	mux := http.NewServeMux()
+	finalHandler := http.HandlerFunc(Handle)
+
 	server := &http.Server{
 		Addr:              fmt.Sprintf("%s:%s", address, port),
+		Handler:           finalHandler,
 		ReadHeaderTimeout: 3 * time.Second,
 	}
 
+	mux.Handle("/", Logging(finalHandler))
+
+	log.Printf("Listening on %s...", url)
 	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatalln("Listening error")
 	}
-}
 
-func Stop() {
-	os.Exit(0)
+	// err := http.ListenAndServe(url, mux)
+	//
+	//	if err != nil {
+	//		log.Fatalln("Listening error")
+	//	}
 }
 
 func Handle(w http.ResponseWriter, req *http.Request) {
-	PrintInfo(*req)
 	switch req.Method {
-	case "GET":
-		fmt.Fprint(w, message)
-	case "POST":
+	case http.MethodGet:
+		fmt.Fprint(w, GetData(req))
+	case http.MethodPost:
 		defer req.Body.Close()
-		resp, err := UpdateMessage(req.Body)
+		resp, err := UpdateData(req)
 		if err != nil {
+			w.WriteHeader(400)
+			fmt.Fprint(w, err)
 			log.Println(err)
 		}
 		fmt.Fprint(w, resp)
+	default:
+		w.WriteHeader(405)
 	}
 }
 
-func UpdateMessage(body io.ReadCloser) (string, error) {
-	bodyBytes, err := io.ReadAll(body)
+func Logging(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		start := time.Now()
+		next.ServeHTTP(w, req)
+		log.Printf("%s %s %s %s",
+			req.Method, req.UserAgent(), req.RemoteAddr, time.Since(start))
+	})
+}
+
+func UpdateData(req *http.Request) (string, error) {
+	var data []idJSON
+	bodyBytes, err := io.ReadAll(req.Body)
 	if err != nil {
 		return "", err
 	}
-	message = string(bodyBytes)
-	return "Message is updated", nil
+	err = json.Unmarshal(bodyBytes, &data)
+	if err != nil {
+		return "", err
+	}
+
+	var builder strings.Builder
+
+	for _, v := range data {
+		builder.WriteString(v.ID)
+		builder.WriteString("; ")
+	}
+	return builder.String(), nil
 }
 
-func PrintInfo(req http.Request) {
-	log.Printf("Request method: %s; User Agent: %s; Remote address: %s;",
-		req.Method,
-		req.UserAgent(),
-		req.RemoteAddr)
+func GetData(req *http.Request) string {
+	return fmt.Sprintf("Request method: %s; RequestURI: %s", req.Method, req.RequestURI)
 }

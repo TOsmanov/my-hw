@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	url    string
-	path   string
-	update string
+	url  string
+	path string
+	data string
 )
 
 func init() {
@@ -22,9 +22,9 @@ func init() {
 		flag.StringVar(&path, "path",
 			"", "Path")
 	}
-	if flag.Lookup("update") == nil {
-		flag.StringVar(&update, "update",
-			"", "Update message")
+	if flag.Lookup("data") == nil {
+		flag.StringVar(&data, "data",
+			"", "Add data to server")
 	}
 }
 
@@ -32,14 +32,14 @@ func main() {
 	flag.Parse()
 	client := client.NewClient(url, path)
 
-	if len(update) == 0 {
-		msg, err := client.GetMessage()
+	if len(data) == 0 {
+		msg, err := client.GetData()
 		if err != nil {
 			log.Fatalln(err)
 		}
 		log.Println(msg)
 	} else {
-		resp, err := client.PostMessage(update)
+		resp, err := client.PostData(data)
 		if err != nil {
 			log.Fatalln(err)
 		}
