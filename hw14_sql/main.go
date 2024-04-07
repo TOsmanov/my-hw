@@ -50,8 +50,8 @@ type NewOrder struct {
 
 func (o *Order) String() string {
 	return fmt.Sprintf(
-		"id: %d; user id: %d; order date: %v; total amount: %v;",
-		o.id, o.userID, o.orderDate.Format(time.DateOnly), o.totalAmount)
+		"id: %d; user id: %d; order date: %s; total amount: %v;",
+		o.id, o.userID, o.orderDate.Format("2006-01-02"), o.totalAmount)
 }
 
 func main() {
