@@ -1,6 +1,6 @@
 module github.com/TOsmanov/my-hw/hw14_sql
 
-go 1.21.5
+go 1.20
 
 require github.com/jackc/pgx v3.6.2+incompatible
 
