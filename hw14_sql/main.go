@@ -10,8 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
-
 type User struct {
 	id       int
 	name     string
@@ -36,16 +34,24 @@ func (p *Product) String() string {
 }
 
 type Order struct {
-	id           int
-	user_id      int
-	order_date   time.Time
-	total_amount float64
+	id          int
+	userID      int
+	orderDate   time.Time
+	totalAmount float64
+}
+
+type NewOrder struct {
+	id         int
+	userID     int
+	orederDate time.Time
+	productID  int
+	amount     int
 }
 
 func (o *Order) String() string {
 	return fmt.Sprintf(
 		"id: %d; user id: %d; order date: %v; total amount: %v;",
-		o.id, o.user_id, o.order_date.Format(time.DateOnly), o.total_amount)
+		o.id, o.userID, o.orderDate.Format(time.DateOnly), o.totalAmount)
 }
 
 func main() {
@@ -62,7 +68,12 @@ func main() {
 	defer db.Close()
 
 	fmt.Println("Successfully connected!")
+	dbPreparation(ctx, db)
+	gettingData(ctx, db)
+}
 
+func dbPreparation(ctx context.Context, db *sql.DB) {
+	var err error
 	// Insert users
 	newUsers := make([]User, 5)
 	newUsers[0] = User{id: 1, name: "John Doe", email: "john@example.com", password: "qwerty1"}
@@ -116,6 +127,7 @@ func main() {
 			log.Printf("Product %s has been successfully added", product.name)
 		}
 	}
+
 	// Edit product
 	updateProduct := Product{id: 1, name: "milk", price: 6.5}
 	err = EditProduct(ctx, db, updateProduct)
@@ -126,22 +138,25 @@ func main() {
 	}
 
 	// Delete product
-	productName := "tomato"
-	err = DeleteProduct(ctx, db, productName)
+	productID := 3
+	err = DeleteProduct(ctx, db, productID)
 	if err != nil {
 		log.Printf("Error when deleting a user: %v", err)
 	} else {
-		log.Printf("Product %s has been successfully deleted", productName)
+		log.Printf("Product with ID %d has been successfully deleted", productID)
 	}
 
 	// Add orders
-	newOrders := make([]Order, 6)
-	newOrders[0] = Order{id: 1, user_id: 5, order_date: time.Now(), total_amount: 10}
-	newOrders[1] = Order{id: 2, user_id: 4, order_date: time.Now(), total_amount: 21}
-	newOrders[2] = Order{id: 3, user_id: 5, order_date: time.Now(), total_amount: 2}
-	newOrders[3] = Order{id: 4, user_id: 1, order_date: time.Now(), total_amount: 7}
-	newOrders[4] = Order{id: 5, user_id: 3, order_date: time.Now(), total_amount: 3.5}
-	newOrders[5] = Order{id: 6, user_id: 5, order_date: time.Now(), total_amount: 1}
+	newOrders := make([]NewOrder, 9)
+	newOrders[0] = NewOrder{id: 1, userID: 5, orederDate: time.Now(), productID: 7, amount: 2}
+	newOrders[1] = NewOrder{id: 2, userID: 4, orederDate: time.Now(), productID: 7, amount: 5}
+	newOrders[2] = NewOrder{id: 3, userID: 5, orederDate: time.Now(), productID: 4, amount: 1}
+	newOrders[3] = NewOrder{id: 4, userID: 1, orederDate: time.Now(), productID: 2, amount: 6}
+	newOrders[4] = NewOrder{id: 5, userID: 3, orederDate: time.Now(), productID: 4, amount: 3}
+	newOrders[5] = NewOrder{id: 6, userID: 5, orederDate: time.Now(), productID: 6, amount: 1}
+	newOrders[6] = NewOrder{id: 7, userID: 5, orederDate: time.Now(), productID: 1, amount: 6}
+	newOrders[7] = NewOrder{id: 8, userID: 5, orederDate: time.Now(), productID: 4, amount: 8}
+	newOrders[8] = NewOrder{id: 9, userID: 5, orederDate: time.Now(), productID: 6, amount: 10}
 
 	for _, order := range newOrders {
 		err = InsertOrder(ctx, db, order)
@@ -160,9 +175,11 @@ func main() {
 	} else {
 		log.Printf("Order %d has been successfully deleted", orderID)
 	}
+}
 
+func gettingData(ctx context.Context, db *sql.DB) {
+	var err error
 	// Select Users
-
 	users, err := SelectUsers(ctx, db)
 	for _, result := range users {
 		if err != nil {
@@ -173,7 +190,6 @@ func main() {
 	}
 
 	// Select Products
-
 	products, err := SelectProducts(ctx, db)
 	for _, result := range products {
 		if err != nil {
@@ -184,7 +200,6 @@ func main() {
 	}
 
 	// Select orders by user
-
 	userID := 5
 	orders, err := SelectOrders(ctx, db, userID)
 	for _, order := range orders {
@@ -192,6 +207,20 @@ func main() {
 			log.Printf("Error when selecting a products: %v", err)
 		} else {
 			log.Println(order.String())
+		}
+	}
+
+	// Select user statistics
+	userIDs := []int{5, 1, 4}
+
+	for _, userID := range userIDs {
+		var total, avg float64
+		total, avg, err = SelectUserStat(ctx, db, userID)
+		if err != nil {
+			log.Printf("Error when getting user statistics: %v", err)
+		} else {
+			log.Printf("User statistics with ID: %d; Total cost of orders: %.2f; Average product price: %.2f",
+				userID, total, avg)
 		}
 	}
 }
@@ -250,30 +279,75 @@ func DeleteUser(ctx context.Context, db *sql.DB, userName string) error {
 	return nil
 }
 
-func DeleteProduct(ctx context.Context, db *sql.DB, productName string) error {
-	q := `delete from Products
+func DeleteProduct(ctx context.Context, db *sql.DB, productID int) error {
+	q := `delete from OrderProducts
+	where product_id=$1;`
+	_, err := db.ExecContext(ctx, q, productID)
+	if err != nil {
+		return err
+	}
+
+	q = `delete from Products
 	where name=$1;`
-	_, err := db.ExecContext(ctx, q, productName)
+	_, err = db.ExecContext(ctx, q, productID)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func InsertOrder(ctx context.Context, db *sql.DB, order Order) error {
-	q := `insert into Orders(id, user_id, order_date, total_amount) values($1, $2, $3, $4)`
-	_, err := db.ExecContext(ctx, q,
-		order.id, order.user_id, order.order_date, order.total_amount)
+func InsertOrder(ctx context.Context, db *sql.DB, order NewOrder) error {
+	price, err := GetProductPrice(ctx, db, order.productID)
+	if err != nil {
+		return err
+	}
+
+	q := `insert into Orders (id, user_id, order_date, total_amount)
+	values($1, $2, $3, $4);`
+	_, err = db.ExecContext(ctx, q,
+		order.id, order.userID, order.orederDate, fmt.Sprintf("%.2f", (float64(order.amount)*price)))
+	if err != nil {
+		return err
+	}
+	q = `insert into OrderProducts (order_id, product_id, amount)
+	values($1, $2, $3)`
+	_, err = db.ExecContext(ctx, q,
+		order.id, order.productID, order.amount)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func GetProductPrice(ctx context.Context, db *sql.DB, productID int) (float64, error) {
+	var price float64
+	q := `select price from Products
+	where id=$1`
+
+	rows, err := db.QueryContext(ctx, q, productID)
+	if err != nil {
+		return -1, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err = rows.Scan(&price); err != nil {
+			return -1, err
+		}
+	}
+	return price, err
 }
 
 func DeleteOrder(ctx context.Context, db *sql.DB, orderID int) error {
-	q := `delete from Orders
-	where id=$1;`
+	q := `delete from OrderProducts
+	where order_id=$1;`
 	_, err := db.ExecContext(ctx, q, orderID)
+	if err != nil {
+		return err
+	}
+
+	q = `delete from Orders
+	where id=$1;`
+	_, err = db.ExecContext(ctx, q, orderID)
 	if err != nil {
 		return err
 	}
@@ -290,14 +364,13 @@ func SelectUsers(ctx context.Context, db *sql.DB) ([]User, error) {
 	}
 	defer rows.Close()
 	for rows.Next() {
-
 		var user User
-		if err := rows.Scan(&user.id, &user.name, &user.email, &user.password); err != nil {
+		if err = rows.Scan(&user.id, &user.name, &user.email, &user.password); err != nil {
 			return nil, err
 		}
 		users = append(users, user)
 	}
-	if err := rows.Err(); err != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 	return users, nil
@@ -314,12 +387,12 @@ func SelectProducts(ctx context.Context, db *sql.DB) ([]Product, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var product Product
-		if err := rows.Scan(&product.id, &product.name, &product.price); err != nil {
+		if err = rows.Scan(&product.id, &product.name, &product.price); err != nil {
 			return nil, err
 		}
 		products = append(products, product)
 	}
-	if err := rows.Err(); err != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 	return products, nil
@@ -337,13 +410,39 @@ func SelectOrders(ctx context.Context, db *sql.DB, userID int) ([]Order, error) 
 	defer rows.Close()
 	for rows.Next() {
 		var order Order
-		if err := rows.Scan(&order.id, &order.user_id, &order.order_date, &order.total_amount); err != nil {
+		if err = rows.Scan(&order.id, &order.userID, &order.orderDate, &order.totalAmount); err != nil {
 			return nil, err
 		}
 		orders = append(orders, order)
 	}
-	if err := rows.Err(); err != nil {
+	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 	return orders, nil
+}
+
+func SelectUserStat(ctx context.Context, db *sql.DB, userID int) (float64, float64, error) {
+	q := `select sum(Orders.total_amount) as total_order_amount,
+    avg(Products.price) as avg_product_price
+	from Users
+	join Orders on $1 = Orders.user_id
+	join OrderProducts on Orders.id = OrderProducts.order_id
+	join Products on OrderProducts.product_id = Products.id
+	group by $1`
+
+	rows, err := db.QueryContext(ctx, q, userID)
+	if err != nil {
+		return -1, -1, err
+	}
+	defer rows.Close()
+	var sum, avg float64
+	for rows.Next() {
+		if err = rows.Scan(&sum, &avg); err != nil {
+			return -1, -1, err
+		}
+	}
+	if err = rows.Err(); err != nil {
+		return -1, -1, err
+	}
+	return sum, avg, err
 }

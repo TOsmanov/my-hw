@@ -15,15 +15,20 @@ CREATE TABLE Orders (
     FOREIGN KEY (user_id)  REFERENCES Users (id)
 );
 
+CREATE INDEX idx_orders ON Orders (user_id);
+
 CREATE TABLE Products (
     id serial PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL
 );
 
+CREATE INDEX idx_products ON Products (name);
+
 CREATE TABLE OrderProducts (
-    products_id INT,
-    orders_id INT,
-    CONSTRAINT fk_productsid FOREIGN KEY (products_id) REFERENCES Products (id),
-    CONSTRAINT fk_ordersid FOREIGN KEY (orders_id) REFERENCES Orders (id)
+    order_id INT PRIMARY KEY,
+    product_id INT NOT NULL,
+    amount INT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Orders(id),
+    FOREIGN KEY (product_id) REFERENCES Products(id)
 );
