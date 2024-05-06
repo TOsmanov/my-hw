@@ -1,0 +1,106 @@
+time=2024-05-07T00:08:17.043+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:08:17.043+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:08:17.051+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:08:17.051+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:08:17.051+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:08:17.051+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:08:35.285+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:08:35.286+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:08:35.286+03:00 level=INFO msg="Server stopped"
+time=2024-05-07T00:08:51.042+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:08:51.042+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:08:51.053+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:08:51.054+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:08:51.054+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:08:51.054+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:09:04.847+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:09:04.847+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:09:04.849+03:00 level=INFO msg="Server stopped"
+./config/local.yaml
+time=2024-05-07T00:12:10.319+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:12:10.319+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:12:10.329+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:12:10.329+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:12:10.329+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:12:10.329+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:12:22.727+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:12:22.727+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:12:22.728+03:00 level=INFO msg="Server stopped"
+./config/local.yaml
+time=2024-05-07T00:12:43.677+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:12:43.678+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:12:43.687+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:12:43.687+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:12:43.687+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:12:43.687+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:12:48.815+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:12:48.816+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:12:48.816+03:00 level=INFO msg="Server stopped"
+{ { } { 0s 0s 0s}}
+time=2024-05-07T00:13:44.782+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:13:44.782+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:13:44.797+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:13:44.797+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:13:44.798+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:13:44.798+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:16:07.979+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:16:07.980+03:00 level=INFO msg="Server stopped"
+time=2024-05-07T00:16:07.980+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+{local {postgres postgres://postgres:admin@localhost/db?sslmode=disable} {localhost:8080 4s 1m0s 10s}}
+time=2024-05-07T00:16:09.764+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:16:09.764+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:16:09.771+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:16:09.771+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:16:09.771+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:16:09.772+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:17:33.026+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:17:33.026+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:17:33.027+03:00 level=INFO msg="Server stopped"
+{local {postgres postgres://postgres:admin@localhost/db?sslmode=disable} {localhost:8080 4s 1m0s 10s}}
+time=2024-05-07T00:17:34.313+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:17:34.313+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:17:34.319+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:17:34.320+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:17:34.320+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:17:34.320+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:19:22.921+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:19:22.923+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:19:22.923+03:00 level=INFO msg="Server stopped"
+time=2024-05-07T00:19:24.511+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:19:24.511+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:19:24.519+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:19:24.519+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:19:24.519+03:00 level=INFO msg="Starting server" address=localhost:8080
+time=2024-05-07T00:19:24.519+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:20:00.483+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:20:00.483+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:20:00.483+03:00 level=INFO msg="Server stopped"
+time=2024-05-07T00:20:03.291+03:00 level=INFO msg="Starting online-shop" env=local
+time=2024-05-07T00:20:03.291+03:00 level=DEBUG msg="DEBUG messages are enabled" env=local
+time=2024-05-07T00:20:03.298+03:00 level=INFO msg="Successfully connected!" driver=postgres dsn="postgres://postgres:admin@localhost/db?sslmode=disable"
+time=2024-05-07T00:20:03.298+03:00 level=INFO msg="logger middleware enabled" component=middleware/logger
+time=2024-05-07T00:20:03.299+03:00 level=INFO msg="Starting server" address=localhost:10001
+time=2024-05-07T00:20:03.299+03:00 level=INFO msg="Server started"
+time=2024-05-07T00:20:10.487+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/users remote_addr=127.0.0.1:40822 user_agent=Go-http-client/1.1 status=200 bytes=444 duration=5.420947ms
+time=2024-05-07T00:20:10.755+03:00 level=ERROR msg="Failed to insert user" op=handlers.users.UsersHandler op=handlers.users.UsersHandler !BADKEY="handlers.UsersHandler.InsertUser: pq: duplicate key value violates unique constraint \"users_pkey\""
+time=2024-05-07T00:20:10.755+03:00 level=INFO msg="request completed" component=middleware/logger method=PUT path=/users remote_addr=127.0.0.1:40838 user_agent=Go-http-client/1.1 status=200 bytes=51 duration=7.492772ms
+time=2024-05-07T00:20:11.041+03:00 level=ERROR msg="Failed to insert user" op=handlers.users.UsersHandler op=handlers.users.UsersHandler op=handlers.users.UsersHandler !BADKEY="handlers.UsersHandler.InsertUser: pq: duplicate key value violates unique constraint \"users_pkey\""
+time=2024-05-07T00:20:11.041+03:00 level=INFO msg="request completed" component=middleware/logger method=PUT path=/users remote_addr=127.0.0.1:40848 user_agent=Go-http-client/1.1 status=200 bytes=51 duration=3.227246ms
+time=2024-05-07T00:20:11.299+03:00 level=INFO msg="request completed" component=middleware/logger method=POST path=/users remote_addr=127.0.0.1:40858 user_agent=Go-http-client/1.1 status=200 bytes=64 duration=10.537313ms
+time=2024-05-07T00:20:11.556+03:00 level=INFO msg="request completed" component=middleware/logger method=DELETE path=/users remote_addr=127.0.0.1:40864 user_agent=Go-http-client/1.1 status=200 bytes=64 duration=2.997495ms
+time=2024-05-07T00:20:11.824+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/users/stat remote_addr=127.0.0.1:40872 user_agent=Go-http-client/1.1 status=200 bytes=29 duration=9.900991ms
+time=2024-05-07T00:20:12.078+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/users remote_addr=127.0.0.1:40882 user_agent=Go-http-client/1.1 status=200 bytes=444 duration=2.201557ms
+time=2024-05-07T00:20:12.328+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/products remote_addr=127.0.0.1:40898 user_agent=Go-http-client/1.1 status=200 bytes=255 duration=2.748682ms
+time=2024-05-07T00:20:12.585+03:00 level=ERROR msg="Failed to insert product" op=handlers.users.ProductsHandler op=handlers.users.ProductsHandler !BADKEY="handlers.ProductsHandler.InsertProduct: products.InsertProduct: pq: duplicate key value violates unique constraint \"products_pkey\""
+time=2024-05-07T00:20:12.585+03:00 level=INFO msg="request completed" component=middleware/logger method=PUT path=/products remote_addr=127.0.0.1:40900 user_agent=Go-http-client/1.1 status=200 bytes=54 duration=3.927117ms
+time=2024-05-07T00:20:12.861+03:00 level=INFO msg="request completed" component=middleware/logger method=POST path=/products remote_addr=127.0.0.1:40904 user_agent=Go-http-client/1.1 status=200 bytes=67 duration=5.6841ms
+time=2024-05-07T00:20:13.130+03:00 level=INFO msg="request completed" component=middleware/logger method=DELETE path=/products remote_addr=127.0.0.1:40908 user_agent=Go-http-client/1.1 status=200 bytes=67 duration=5.017284ms
+time=2024-05-07T00:20:13.384+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/products remote_addr=127.0.0.1:40912 user_agent=Go-http-client/1.1 status=200 bytes=255 duration=2.396491ms
+time=2024-05-07T00:20:13.651+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/orders remote_addr=127.0.0.1:40926 user_agent=Go-http-client/1.1 status=200 bytes=145 duration=3.832988ms
+time=2024-05-07T00:20:13.919+03:00 level=ERROR msg="Failed to insert order" op=handlers.users.OrdersHandler op=handlers.users.OrdersHandler !BADKEY="handlers.OrderHandler.InsertOrder: orders.InsertOrder: products.GetProductPrice: Invalid value of the price field"
+time=2024-05-07T00:20:13.919+03:00 level=INFO msg="request completed" component=middleware/logger method=PUT path=/orders remote_addr=127.0.0.1:40940 user_agent=Go-http-client/1.1 status=200 bytes=52 duration=14.55382ms
+time=2024-05-07T00:20:14.178+03:00 level=INFO msg="request completed" component=middleware/logger method=DELETE path=/orders remote_addr=127.0.0.1:40948 user_agent=Go-http-client/1.1 status=200 bytes=65 duration=4.010835ms
+time=2024-05-07T00:20:14.434+03:00 level=INFO msg="request completed" component=middleware/logger method=GET path=/orders remote_addr=127.0.0.1:40952 user_agent=Go-http-client/1.1 status=200 bytes=151 duration=3.011853ms
+time=2024-05-07T00:20:16.749+03:00 level=INFO msg="Stopping server"
+time=2024-05-07T00:20:16.749+03:00 level=ERROR msg="Failed to serve server" error="http: Server closed"
+time=2024-05-07T00:20:16.749+03:00 level=INFO msg="Server stopped"

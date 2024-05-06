@@ -55,8 +55,6 @@ func main() {
 	router.HandleFunc("/products", handlers.ProductsHandler(log, &Storage))
 	router.HandleFunc("/orders", handlers.OrdersHandler(log, &Storage))
 
-	log.Info("Starting server", slog.String("address", cfg.HTTPServer.Address))
-
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
@@ -67,6 +65,8 @@ func main() {
 		WriteTimeout: cfg.HTTPServer.Timeout,
 		IdleTimeout:  cfg.HTTPServer.IdleTimeout,
 	}
+
+	log.Info("Starting server", slog.String("address", srv.Addr))
 
 	go func() {
 		if err = srv.ListenAndServe(); err != nil {

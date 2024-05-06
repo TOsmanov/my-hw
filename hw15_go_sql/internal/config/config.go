@@ -29,13 +29,12 @@ type DB struct {
 func MustLoad() *Config {
 	configPath := getEnv("CONFIG_PATH", "./config/local.yaml")
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
-		log.Fatalf("config file does not exist: %s", configPath)
+		log.Fatalf("Config file does not exist: %s", configPath)
 	}
 
 	var cfg Config
-
 	if err := cleanenv.ReadConfig(configPath, &cfg); err != nil {
-		log.Fatalf("cannot read config: %s", err)
+		log.Fatalf("Cannot read config: %s", err)
 	}
 
 	return &cfg
