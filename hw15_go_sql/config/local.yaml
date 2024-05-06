@@ -1,0 +1,9 @@
+enviroment: "local"
+database:
+  driver_name: postgres
+  dsn: "postgres://postgres:admin@localhost/db?sslmode=disable"
+
+http_server:
+  address: "localhost:10001"
+  timeout: 4s
+  idle_timeout: 60s
