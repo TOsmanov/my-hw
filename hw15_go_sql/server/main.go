@@ -8,10 +8,9 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/config"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/handlers"
 	mwLogger "github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/middleware/logger"
-
-	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/config"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/lib/logger/sl"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"
 	"github.com/go-chi/chi/v5"
@@ -69,7 +68,7 @@ func main() {
 	}
 
 	go func() {
-		if err := srv.ListenAndServe(); err != nil {
+		if err = srv.ListenAndServe(); err != nil {
 			log.Error("Failed to serve server", sl.Err(err))
 		}
 	}()
@@ -82,7 +81,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), cfg.HTTPServer.ShutdownTimeout)
 	defer cancel()
 
-	if err := srv.Shutdown(ctx); err != nil {
+	if err = srv.Shutdown(ctx); err != nil {
 		log.Error("Failed to stop server", sl.Err(err))
 		return
 	}

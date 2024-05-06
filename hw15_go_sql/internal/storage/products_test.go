@@ -44,6 +44,7 @@ func TestInsertProduct(t *testing.T) {
 	err = s.InsertProduct(Product1)
 	assert.Nil(t, err)
 }
+
 func TestGetProducts(t *testing.T) {
 	db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
 	var s Storage

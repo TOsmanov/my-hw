@@ -7,15 +7,15 @@ import (
 
 type Order struct {
 	ID          int       `json:"id"`
-	UserID      int       `json:"user_id"`
-	OrderDate   time.Time `json:"order_date,omitempty"`
-	TotalAmount float64   `json:"total_amount"`
+	UserID      int       `json:"userId"`
+	OrderDate   time.Time `json:"orderDate,omitempty"`
+	TotalAmount float64   `json:"totalAmount"`
 }
 
 type NewOrder struct {
 	ID        int `json:"id"`
-	UserID    int `json:"user_id"`
-	ProductID int `json:"product_id"`
+	UserID    int `json:"userId"`
+	ProductID int `json:"productId"`
 	Amount    int `json:"amount"`
 }
 
@@ -93,7 +93,7 @@ func (storage *Storage) DeleteOrder(orderID int) error {
 	return nil
 }
 
-func (storage *Storage) GetOrders(UserID int) ([]Order, error) {
+func (storage *Storage) GetOrders(userID int) ([]Order, error) {
 	const op = "orders.GetOrders"
 
 	tx, err := storage.DB.Begin()
@@ -107,7 +107,7 @@ func (storage *Storage) GetOrders(UserID int) ([]Order, error) {
 	q := `select * from Orders
 	where user_id=$1`
 
-	rows, err := tx.QueryContext(Context, q, UserID)
+	rows, err := tx.QueryContext(Context, q, userID)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}

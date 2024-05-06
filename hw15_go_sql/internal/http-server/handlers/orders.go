@@ -13,7 +13,9 @@ import (
 	"github.com/go-chi/render"
 )
 
-func GetOrders(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func GetOrders(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.OrderHandler.GetOrder"
 
 	b, err := io.ReadAll(r.Body)
@@ -26,7 +28,6 @@ func GetOrders(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *h
 
 	userID, _ := strconv.Atoi(string(b))
 	data, err := s.GetOrders(userID)
-
 	if err != nil {
 		log.Error("Failed to get orders", fmt.Errorf("%s: %w", op, err))
 		render.JSON(w, r, response.Error("Failed to get orders"))
@@ -34,7 +35,9 @@ func GetOrders(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *h
 	render.JSON(w, r, data)
 }
 
-func InsertOrder(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func InsertOrder(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.OrderHandler.InsertOrder"
 	var order storage.NewOrder
 
@@ -57,7 +60,9 @@ func InsertOrder(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r 
 	responseOK(w, r, "The order has been successfully added")
 }
 
-func DeleteOrder(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func DeleteOrder(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.OrderHandler.DeleteOrder"
 
 	b, err := io.ReadAll(r.Body)

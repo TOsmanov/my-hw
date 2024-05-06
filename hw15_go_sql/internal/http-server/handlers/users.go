@@ -13,10 +13,11 @@ import (
 	"github.com/go-chi/render"
 )
 
-func GetUsers(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func GetUsers(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.UsersHandler.GetUsers"
 	data, err := s.GetUsers()
-
 	if err != nil {
 		log.Error("Failed to get users", fmt.Errorf("%s: %w", op, err))
 		render.JSON(w, r, response.Error("Failed to get users"))
@@ -24,7 +25,9 @@ func GetUsers(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *ht
 	render.JSON(w, r, data)
 }
 
-func InsertUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func InsertUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.UsersHandler.InsertUser"
 	var user storage.User
 
@@ -47,7 +50,9 @@ func InsertUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *
 	responseOK(w, r, "The user has been successfully added")
 }
 
-func UpdateUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func UpdateUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.UsersHandler.UpdateUser"
 	var user storage.User
 
@@ -70,7 +75,9 @@ func UpdateUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *
 	responseOK(w, r, "The user has been successfully updated")
 }
 
-func DeleteUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func DeleteUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.UsersHandler.DeleteUser"
 
 	b, err := io.ReadAll(r.Body)
@@ -90,7 +97,9 @@ func DeleteUser(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *
 	responseOK(w, r, "The user has been successfully deleted")
 }
 
-func GetUserStat(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func GetUserStat(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.UsersHandler.GetUserStat"
 	b, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -103,7 +112,6 @@ func GetUserStat(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r 
 	userID, _ := strconv.Atoi(string(b))
 
 	sum, avg, err := s.GetUserStat(userID)
-
 	if err != nil {
 		log.Error("Failed to get users", fmt.Errorf("%s: %w", op, err))
 		render.JSON(w, r, response.Error("Failed to get users"))

@@ -4,10 +4,9 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/go-chi/render"
-
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/lib/api/response"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"
+	"github.com/go-chi/render"
 )
 
 type Response struct {
@@ -19,19 +18,18 @@ func UsersHandler(log *slog.Logger, storage *storage.Storage) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "handlers.users.UsersHandler"
 
-		log := log.With(
+		log = log.With(
 			slog.String("op", op),
 		)
-		var resp response.Response
 		switch r.Method {
 		case http.MethodGet:
-			GetUsers(log, storage, w, r, &resp)
+			GetUsers(log, storage, w, r)
 		case http.MethodPut:
-			InsertUser(log, storage, w, r, &resp)
+			InsertUser(log, storage, w, r)
 		case http.MethodPost:
-			UpdateUser(log, storage, w, r, &resp)
+			UpdateUser(log, storage, w, r)
 		case http.MethodDelete:
-			DeleteUser(log, storage, w, r, &resp)
+			DeleteUser(log, storage, w, r)
 		}
 	}
 }
@@ -40,14 +38,10 @@ func UserStatHandler(log *slog.Logger, storage *storage.Storage) http.HandlerFun
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "handlers.users.UsersHandler"
 
-		log := log.With(
+		log = log.With(
 			slog.String("op", op),
 		)
-		var resp response.Response
-		switch r.Method {
-		case http.MethodGet:
-			GetUserStat(log, storage, w, r, &resp)
-		}
+		GetUserStat(log, storage, w, r)
 	}
 }
 
@@ -55,19 +49,18 @@ func ProductsHandler(log *slog.Logger, storage *storage.Storage) http.HandlerFun
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "handlers.users.ProductsHandler"
 
-		log := log.With(
+		log = log.With(
 			slog.String("op", op),
 		)
-		var resp response.Response
 		switch r.Method {
 		case http.MethodGet:
-			GetProducts(log, storage, w, r, &resp)
+			GetProducts(log, storage, w, r)
 		case http.MethodPut:
-			InsertProduct(log, storage, w, r, &resp)
+			InsertProduct(log, storage, w, r)
 		case http.MethodPost:
-			UpdateProduct(log, storage, w, r, &resp)
+			UpdateProduct(log, storage, w, r)
 		case http.MethodDelete:
-			DeleteProduct(log, storage, w, r, &resp)
+			DeleteProduct(log, storage, w, r)
 		}
 	}
 }
@@ -76,17 +69,16 @@ func OrdersHandler(log *slog.Logger, storage *storage.Storage) http.HandlerFunc 
 	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "handlers.users.OrdersHandler"
 
-		log := log.With(
+		log = log.With(
 			slog.String("op", op),
 		)
-		var resp response.Response
 		switch r.Method {
 		case http.MethodGet:
-			GetOrders(log, storage, w, r, &resp)
+			GetOrders(log, storage, w, r)
 		case http.MethodPut:
-			InsertOrder(log, storage, w, r, &resp)
+			InsertOrder(log, storage, w, r)
 		case http.MethodDelete:
-			DeleteOrder(log, storage, w, r, &resp)
+			DeleteOrder(log, storage, w, r)
 		}
 	}
 }

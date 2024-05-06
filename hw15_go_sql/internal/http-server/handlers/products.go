@@ -13,10 +13,11 @@ import (
 	"github.com/go-chi/render"
 )
 
-func GetProducts(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func GetProducts(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.ProductsHandler.GetProducts"
 	data, err := s.GetProducts()
-
 	if err != nil {
 		log.Error("Failed to get products", fmt.Errorf("%s: %w", op, err))
 		render.JSON(w, r, response.Error("Failed to get products"))
@@ -24,7 +25,9 @@ func GetProducts(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r 
 	render.JSON(w, r, data)
 }
 
-func InsertProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func InsertProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.ProductsHandler.InsertProduct"
 	var product storage.Product
 
@@ -47,7 +50,9 @@ func InsertProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, 
 	responseOK(w, r, "The product has been successfully added")
 }
 
-func UpdateProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func UpdateProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.ProductsHandler.UpdateProduct"
 	var product storage.Product
 
@@ -70,7 +75,9 @@ func UpdateProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, 
 	responseOK(w, r, "The product has been successfully updated")
 }
 
-func DeleteProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter, r *http.Request, resp *response.Response) {
+func DeleteProduct(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,
+	r *http.Request,
+) {
 	const op = "handlers.ProductsHandler.DeleteProduct"
 
 	b, err := io.ReadAll(r.Body)

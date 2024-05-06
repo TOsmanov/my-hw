@@ -28,7 +28,6 @@ func (storage *Storage) GetUsers() ([]User, error) {
 
 	q := `select * from Users`
 	rows, err := tx.QueryContext(Context, q)
-
 	if err != nil {
 		return nil, err
 	}

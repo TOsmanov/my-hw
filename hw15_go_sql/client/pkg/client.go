@@ -28,7 +28,6 @@ func (c *Client) GetData(path string, data string, method string) (string, error
 		c.makeURL(path),
 		bytes.NewBuffer([]byte(data)),
 	)
-
 	if err != nil {
 		return "", err
 	}

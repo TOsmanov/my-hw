@@ -42,10 +42,6 @@ var (
 	}
 )
 
-// func TestInsertProduct() {
-
-// }
-
 func TestGetOrders(t *testing.T) {
 	db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
 	var s Storage
@@ -108,7 +104,7 @@ func TestInsertOrder(t *testing.T) {
 	priceRows := sqlmock.NewRows([]string{"price"}).
 		AddRow(Product2.Price)
 
-	date := time.Now()
+	date = time.Now()
 	mock.ExpectBegin()
 	mock.ExpectQuery(`select price from Products
 	where id=$1`).

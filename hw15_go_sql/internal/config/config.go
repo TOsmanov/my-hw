@@ -11,18 +11,18 @@ import (
 type Config struct {
 	Env        string `yaml:"env" env-default:"local"`
 	DB         `yaml:"database"`
-	HTTPServer `yaml:"http_server"`
+	HTTPServer `yaml:"httpServer"`
 }
 
 type HTTPServer struct {
 	Address         string        `yaml:"address" env-default:"localhost:8080"`
 	Timeout         time.Duration `yaml:"timeout" env-default:"4s"`
-	IdleTimeout     time.Duration `yaml:"idle_timeout" env-default:"60s"`
-	ShutdownTimeout time.Duration `yaml:"shutdown_timeout" env-default:"10s"`
+	IdleTimeout     time.Duration `yaml:"idleTimeout" env-default:"60s"`
+	ShutdownTimeout time.Duration `yaml:"shutdownTimeout" env-default:"10s"`
 }
 
 type DB struct {
-	Driver string `yaml:"driver_name" env-default:"postgres"`
+	Driver string `yaml:"driverName" env-default:"postgres"`
 	Dsn    string `yaml:"dsn" env-default:"postgres://postgres:admin@localhost/db?sslmode=disable"`
 }
 
