@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // driver for sql
 )
 
 type Storage struct {

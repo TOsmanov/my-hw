@@ -7,8 +7,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"golang.org/x/exp/slog"
-
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/config"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/handlers"
 	mwLogger "github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/middleware/logger"
@@ -16,6 +14,7 @@ import (
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"golang.org/x/exp/slog"
 )
 
 var Storage storage.Storage

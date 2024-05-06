@@ -7,11 +7,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"golang.org/x/exp/slog"
-
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/lib/api/response"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"
 	"github.com/go-chi/render"
+	"golang.org/x/exp/slog"
 )
 
 func GetProducts(log *slog.Logger, s *storage.Storage, w http.ResponseWriter,

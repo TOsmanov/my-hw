@@ -3,11 +3,10 @@ package handlers
 import (
 	"net/http"
 
-	"golang.org/x/exp/slog"
-
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/lib/api/response"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"
 	"github.com/go-chi/render"
+	"golang.org/x/exp/slog"
 )
 
 type Response struct {
