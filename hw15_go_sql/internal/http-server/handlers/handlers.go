@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"log/slog"
 	"net/http"
+
+	"golang.org/x/exp/slog"
 
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/lib/api/response"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/storage"

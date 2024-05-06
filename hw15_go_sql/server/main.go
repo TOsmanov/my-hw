@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
-	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"golang.org/x/exp/slog"
 
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/config"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/handlers"
