@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/config"
 	"github.com/TOsmanov/my-hw/hw15_go_sql/internal/http-server/handlers"
@@ -33,11 +34,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = Storage.Ping()
-	if err != nil {
-		log.Error("Failed to ping database", sl.Err(err))
-		os.Exit(1)
-	}
+	PingDB(log)
 
 	defer Storage.CloseDB()
 
@@ -103,4 +100,15 @@ func setupLogger(env string) *slog.Logger {
 	}
 
 	return log
+}
+
+func PingDB(log *slog.Logger) {
+	err := Storage.Ping()
+	if err != nil {
+		log.Info("Database is down")
+		time.Sleep(5 * time.Second)
+		PingDB(log)
+	}
+
+	log.Info("Database up")
 }
