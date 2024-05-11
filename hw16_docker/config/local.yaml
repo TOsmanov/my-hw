@@ -1,0 +1,9 @@
+enviroment: "local"
+database:
+    driverName: postgres
+    dsn: "postgres://postgres:admin@my-db/db?sslmode=disable"
+
+httpServer:
+    address: "online-shop:10001"
+    timeout: 4s
+    idleTimeout: 60s

@@ -3,6 +3,7 @@ package storage
 import (
 	"context"
 	"database/sql"
+	"time"
 
 	_ "github.com/lib/pq" // driver for sql
 )
@@ -34,6 +35,9 @@ func (storage *Storage) CloseDB() {
 }
 
 func (storage *Storage) Ping() error {
-	err := storage.DB.PingContext(Context)
+	ctx, cancel := context.WithTimeout(Context, 1*time.Second)
+	defer cancel()
+
+	err := storage.DB.PingContext(ctx)
 	return err
 }
